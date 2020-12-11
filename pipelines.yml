@@ -26,9 +26,9 @@ resources:
   - name: Pipeline-Testing_promoted_build_info
     type: BuildInfo
     configuration: DockerBuildImagePipeline
-      sourceArtifactory: docker-test-local
-      buildName: Pipeline-Testing_build
-      buildNumber: 1
+      sourceArtifactory:docker-test-local
+      buildName:Pipeline-Testing_build
+      buildNumber:1
       
 
 pipelines:
