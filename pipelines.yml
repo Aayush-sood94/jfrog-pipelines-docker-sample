@@ -10,7 +10,7 @@ resources:
   - name: Pipeline-Testing_image
     type: Image
     configuration:
-      registry:  aayush                               # <-- replace with your artifactory integration
+      registry:  docker-test-local                               # <-- replace with your artifactory integration
       sourceRepository: docker-test-local/aayush               # <-- required if registry is Artifactory
       imageName: lorelic2.jfrog.io/artifactory/docker-test-local/aayush  # < -- replace with your image path and name
       imageTag: latest
