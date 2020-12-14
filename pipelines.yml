@@ -57,7 +57,7 @@ pipelines:
           outputResources:
             - name: Pipeline-Testing_image
 
-      - name: publish_pipeline-testing_build
+      - name: publish_pipeline
         type: PublishBuildInfo
         configuration:
           inputSteps:
@@ -65,7 +65,7 @@ pipelines:
           outputResources:
             - name: Pipeline-Testing_build_info
 
-      - name: promote_pipeline-testing_build
+      - name: promote_pipeline
         type: PromoteBuild
         configuration:
           targetRepository: demo-pipelines
