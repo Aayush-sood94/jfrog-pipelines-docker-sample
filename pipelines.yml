@@ -35,23 +35,23 @@ pipelines:
       - name: docker_build
         type: DockerBuild
         configuration:
-          affinityGroup: Pipeline-Testing_group
+          affinityGroup: pipeline-testing_group
           dockerFileLocation: .
           dockerFileName: Dockerfile
           dockerImageName: lorelic2.jfrog.io/artifactory/docker-test-local/aayush   # replace with your image path and name
           dockerImageTag: ${run_number}
           inputResources:
-            - name: Pipeline-Testing_repo
+            - name: Pipeline-Testing
           integrations:
-            - name: DockerBuildImagePipeline                            # <-- replace with your Artifactory integration
+            - name: art                            # <-- replace with your Artifactory integration
 
       - name: docker_push
         type: DockerPush
         configuration:
-          affinityGroup: Pipeline-Testing_group
+          affinityGroup: pipeline-testing_group
           targetRepository: docker-test-local
           integrations:
-            - name: DockerBuildImagePipeline                            # <-- replace with your Artifactory integration
+            - name: art                            # <-- replace with your Artifactory integration
           inputSteps:
             - name: docker_build
           outputResources:
@@ -65,12 +65,12 @@ pipelines:
           outputResources:
             - name: Pipeline-Testing_build_info
 
-      - name: promote_Pipeline-Testing_build
+      - name: promote_pipeline-testing_build
         type: PromoteBuild
         configuration:
           targetRepository: demo-pipelines
           integrations:
-            - name: DockerBuildImagePipeline
+            - name: art
           inputResources:
             - name: Pipeline-Testing_build_info
           outputResources:
