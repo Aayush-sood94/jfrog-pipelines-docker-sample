@@ -1,5 +1,5 @@
 resources:
-  - name: Pipeline-Testing
+  - name: Pipeline_Testing
     type: GitRepo
     configuration:
       gitProvider: DockerBuildImagePipeline                       # <-- replace with your integration
@@ -7,7 +7,7 @@ resources:
       branches:
         include: master
 
-  - name: Pipeline-Testing_image
+  - name: pipeline_testing_image
     type: Image
     configuration:
       registry:  art                               # <-- replace with your artifactory integration
@@ -16,21 +16,21 @@ resources:
       imageTag: latest
       autoPull: true
       
-  - name: Pipeline-Testing_build_info
+  - name: pipeline_testing_build_info
     type: BuildInfo
     configuration:
       sourceArtifactory: art 
-      buildName: Pipeline-Testing_build
+      buildName: pipeline_testing_build
       buildNumber: 1    
 
-  - name: Pipeline-Testing_promoted_build_info
+  - name: pipeline_testing_promoted_build_info
     type: BuildInfo
     configuration: 
         sourceArtifactory: art
-        buildName: Pipeline-Testing_build
+        buildName: pipeline_testing_build
         buildNumber: 1
 pipelines:
-  - name: pipeline_Pipeline-Testing
+  - name: pipeline_testing
     steps:
       - name: docker_build
         type: DockerBuild
@@ -41,7 +41,7 @@ pipelines:
           dockerImageName: lorelic2.jfrog.io/artifactory/docker-test-local/aayush   # replace with your image path and name
           dockerImageTag: ${run_number}
           inputResources:
-            - name: Pipeline-Testing
+            - name: pipeline_testing
           integrations:
             - name: art                            # <-- replace with your Artifactory integration
 
@@ -55,7 +55,7 @@ pipelines:
           inputSteps:
             - name: docker_build
           outputResources:
-            - name: Pipeline-Testing_image
+            - name: pipeline_testing_image
 
       - name: publish_pipeline
         type: PublishBuildInfo
@@ -63,7 +63,7 @@ pipelines:
           inputSteps:
             - name: docker_push
           outputResources:
-            - name: Pipeline-Testing_build_info
+            - name: pipeline_testing_build_info
 
       - name: promote_pipeline
         type: PromoteBuild
@@ -72,7 +72,7 @@ pipelines:
           integrations:
             - name: art
           inputResources:
-            - name: Pipeline-Testing_build_info
+            - name: pipeline_testing_build_info
           outputResources:
-            - name: Pipeline-Testing_promoted_build_info
+            - name: pipeline_testing_promoted_build_info
 
