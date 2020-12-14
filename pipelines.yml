@@ -57,7 +57,7 @@ pipelines:
           outputResources:
             - name: Pipeline-Testing_image
 
-      - name: publish_Pipeline-Testing_build
+      - name: publish_pipeline-testing_build
         type: PublishBuildInfo
         configuration:
           inputSteps:
