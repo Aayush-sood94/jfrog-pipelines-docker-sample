@@ -10,7 +10,7 @@ resources:
   - name: Pipeline-Testing_image
     type: Image
     configuration:
-      registry:  docker-test-local                               # <-- replace with your artifactory integration
+      registry:  DockerBuildImagePipeline                               # <-- replace with your artifactory integration
       sourceRepository: docker-test-local/aayush               # <-- required if registry is Artifactory
       imageName: lorelic2.jfrog.io/artifactory/docker-test-local/aayush  # < -- replace with your image path and name
       imageTag: latest
@@ -19,18 +19,16 @@ resources:
   - name: Pipeline-Testing_build_info
     type: BuildInfo
     configuration:
-      sourceArtifactory: docker-test-local 
+      sourceArtifactory: DockerBuildImagePipeline 
       buildName: Pipeline-Testing_build
       buildNumber: 1    
 
   - name: Pipeline-Testing_promoted_build_info
     type: BuildInfo
     configuration: DockerBuildImagePipeline
-      sourceArtifactory:docker-test-local
-      buildName:Pipeline-Testing_build
-      buildNumber:1
-      
-
+        sourceArtifactory:aayush
+        buildName:Pipeline-Testing_build
+        buildNumber:1
 pipelines:
   - name: pipeline_Pipeline-Testing
     steps:
