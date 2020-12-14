@@ -1,5 +1,5 @@
 resources:
-  - name: Pipeline_Testing
+  - name: pipeline_testing
     type: GitRepo
     configuration:
       gitProvider: DockerBuildImagePipeline                       # <-- replace with your integration
