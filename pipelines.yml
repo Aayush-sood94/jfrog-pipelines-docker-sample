@@ -10,8 +10,8 @@ resources:
   - name: Pipeline-Testing_image
     type: Image
     configuration:
-      registry:  DockerBuildImagePipeline                               # <-- replace with your artifactory integration
-      sourceRepository: docker-test-local/aayush               # <-- required if registry is Artifactory
+      registry:  art                               # <-- replace with your artifactory integration
+      sourceRepository: docker-test-local               # <-- required if registry is Artifactory
       imageName: lorelic2.jfrog.io/artifactory/docker-test-local/aayush  # < -- replace with your image path and name
       imageTag: latest
       autoPull: true
@@ -19,16 +19,16 @@ resources:
   - name: Pipeline-Testing_build_info
     type: BuildInfo
     configuration:
-      sourceArtifactory: DockerBuildImagePipeline 
+      sourceArtifactory: art 
       buildName: Pipeline-Testing_build
       buildNumber: 1    
 
   - name: Pipeline-Testing_promoted_build_info
     type: BuildInfo
-    configuration: DockerBuildImagePipeline
-        sourceArtifactory:aayush
-        buildName:Pipeline-Testing_build
-        buildNumber:1
+    configuration: 
+        sourceArtifactory: art
+        buildName: Pipeline-Testing_build
+        buildNumber: 1
 pipelines:
   - name: pipeline_Pipeline-Testing
     steps:
