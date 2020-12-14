@@ -35,7 +35,7 @@ pipelines:
       - name: docker_build
         type: DockerBuild
         configuration:
-          affinityGroup: pipeline-testing_group
+          affinityGroup: pipeline-testing
           dockerFileLocation: .
           dockerFileName: Dockerfile
           dockerImageName: lorelic2.jfrog.io/artifactory/docker-test-local/aayush   # replace with your image path and name
@@ -48,7 +48,7 @@ pipelines:
       - name: docker_push
         type: DockerPush
         configuration:
-          affinityGroup: pipeline-testing_group
+          affinityGroup: pipeline-testing
           targetRepository: docker-test-local
           integrations:
             - name: art                            # <-- replace with your Artifactory integration
